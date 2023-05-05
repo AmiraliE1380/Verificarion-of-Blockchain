@@ -90,12 +90,12 @@ module selfish_mining_general_strategy
   
 
 
-  	[] act=1 -> (act'=0); //does not publish
+  	[] act=1 & honest_mined=0 -> (act'=0); //does not publish
 
 
 	//tree 4
   	//publish a block from t4
-  	[] act=1 & n41>0 -> (act'=0) & (fb5'=fb4) & (fb4'=fb3) & (fb3'=fb2) & (fb2'=fb1) & (fb1'=b1) &
+  	[] act=1 & n41>0 & honest_mined=0 -> (act'=0) & (fb5'=fb4) & (fb4'=fb3) & (fb3'=fb2) & (fb2'=fb1) & (fb1'=b1) &
 		(b1'=b2) & (b2'=b3) & (b3'=1) &
       		(n11'=n21) & (n12'=n22) & (n13'=n23) & (n14'=n24) & (n15'=0) &
       		(n21'=n31) & (n22'=n32) & (n23'=n33) & (n24'=0) &
@@ -103,7 +103,7 @@ module selfish_mining_general_strategy
       		(n41'=min(1,n42)) & (n42'=min(1, n43)) & (n43'=0); //correct!!!!!!!
 
   	//publish 2 blocks from t4
-  	[] act=1 & n42>0 -> (act'=0) & (fb5'=fb3) & (fb4'=fb2) & (fb3'=fb1) & (fb2'=b1) & (fb1'=b2) &
+  	[] act=1 & n42>0 & honest_mined=0 -> (act'=0) & (fb5'=fb3) & (fb4'=fb2) & (fb3'=fb1) & (fb2'=b1) & (fb1'=b2) &
 		(b1'=b3) & (b2'=1) & (b3'=1) &
       		(n11'=n31) & (n12'=n32) & (n13'=n33) & (n14'=0) & (n15'=0) &
       		(n21'=n41-1) & (n22'=0) & (n23'=0) & (n24'=0) &
@@ -111,7 +111,7 @@ module selfish_mining_general_strategy
      		(n41'=min(1,n43)) & (n42'=0) & (n43'=0);  //correct!!!!!!!
 
   	//publish 3 blocks from t4
-  	[] act=1 & n43>0 -> (act'=0) & (fb5'=fb2) & (fb4'=fb1) & (fb3'=b1) & (fb2'=b2) & (fb1'=b3) &
+  	[] act=1 & n43>0 & honest_mined=0 -> (act'=0) & (fb5'=fb2) & (fb4'=fb1) & (fb3'=b1) & (fb2'=b2) & (fb1'=b3) &
 		(b1'=1) & (b2'=1) & (b3'=1) &
       		(n11'=n41-1) & (n12'=0) & (n13'=0) & (n14'=0) & (n15'=0) &
       		(n21'=0) & (n22'=0) & (n23'=0) & (n24'=0) &
@@ -123,7 +123,7 @@ module selfish_mining_general_strategy
 
 	//tree 3
   	//publish 2 blocks from t3
-  	[] act=1 & n32>0 -> (act'=0) & (fb5'=fb4) & (fb4'=fb3) & (fb3'=fb2) & (fb2'=fb1) & (fb1'=b1) &
+  	[] act=1 & n32>0 & honest_mined=0 -> (act'=0) & (fb5'=fb4) & (fb4'=fb3) & (fb3'=fb2) & (fb2'=fb1) & (fb1'=b1) &
 		(b1'=b2) & (b2'=1) & (b3'=1) &
       		(n11'=n21) & (n12'=n22) & (n13'=n23) & (n14'=n24) & (n15'=0) &
       		(n21'=n31-1) & (n22'=0) & (n23'=0) & (n24'=0) &
@@ -131,7 +131,7 @@ module selfish_mining_general_strategy
      		(n41'=min(1,n33)) & (n42'=0) & (n43'=0); //correct!!!!!!!
 
   	//publish 3 blocks from t3
-  	[] act=1 & n33>0 -> (act'=0) & (fb5'=fb3) & (fb4'=fb2) & (fb3'=fb1) & (fb2'=b1) & (fb1'=b2) &
+  	[] act=1 & n33>0 & honest_mined=0 -> (act'=0) & (fb5'=fb3) & (fb4'=fb2) & (fb3'=fb1) & (fb2'=b1) & (fb1'=b2) &
 		(b1'=1) & (b2'=1) & (b3'=1) &
       		(n11'=n31-1) & (n12'=0) & (n13'=0) & (n14'=0) & (n15'=0) &
       		(n21'=0) & (n22'=0) & (n23'=0) & (n24'=0) &
@@ -144,7 +144,7 @@ module selfish_mining_general_strategy
 
 	//tree 2
   	//publish 3 blocks from t2
-  	[] act=1 & n23>0 -> (act'=0) & (fb5'=fb4) & (fb4'=fb3) & (fb3'=fb2) & (fb2'=fb1) & (fb1'=b1) &
+  	[] act=1 & n23>0 & honest_mined=0 -> (act'=0) & (fb5'=fb4) & (fb4'=fb3) & (fb3'=fb2) & (fb2'=fb1) & (fb1'=b1) &
 		(b1'=1) & (b2'=1) & (b3'=1) &
       		(n11'=n21-1) & (n12'=0) & (n13'=0) & (n14'=0) & (n15'=0) &
       		(n21'=0) & (n22'=0) & (n23'=0) & (n24'=0) &
@@ -152,7 +152,7 @@ module selfish_mining_general_strategy
      		(n41'=min(1,n24)) & (n42'=0) & (n43'=0);
 
   	//publish 4 blocks from t2
-  	[] act=1 & n24>0 -> (act'=0) & (fb5'=fb3) & (fb4'=fb2) & (fb3'=fb1) & (fb2'=b1) & (fb1'=1) &
+  	[] act=1 & n24>0 & honest_mined=0 -> (act'=0) & (fb5'=fb3) & (fb4'=fb2) & (fb3'=fb1) & (fb2'=b1) & (fb1'=1) &
 		(b1'=1) & (b2'=1) & (b3'=1) &
       		(n11'=0) & (n12'=0) & (n13'=0) & (n14'=0) & (n15'=0) &
       		(n21'=0) & (n22'=0) & (n23'=0) & (n24'=0) &
@@ -164,7 +164,7 @@ module selfish_mining_general_strategy
 
 	//tree 1
   	//publish 4 blocks from t1
-  	[] act=1 & n14>0 -> (act'=0) & (fb5'=fb4) & (fb4'=fb3) & (fb3'=fb2) & (fb2'=fb1) & (fb1'=1) &
+  	[] act=1 & n14>0 & honest_mined=0 -> (act'=0) & (fb5'=fb4) & (fb4'=fb3) & (fb3'=fb2) & (fb2'=fb1) & (fb1'=1) &
 		(b1'=1) & (b2'=1) & (b3'=1) &
       		(n11'=0) & (n12'=0) & (n13'=0) & (n14'=0) & (n15'=0) &
       		(n21'=0) & (n22'=0) & (n23'=0) & (n24'=0) &
@@ -172,7 +172,7 @@ module selfish_mining_general_strategy
      		(n41'=min(1, n15)) & (n42'=0) & (n43'=0);
 
   	//publish 5 blocks from t1
-  	[] act=1 & n15>0 -> (act'=0) & (fb5'=fb3) & (fb4'=fb2) & (fb3'=fb1) & (fb2'=1) & (fb1'=1) &
+  	[] act=1 & n15>0 & honest_mined=0 -> (act'=0) & (fb5'=fb3) & (fb4'=fb2) & (fb3'=fb1) & (fb2'=1) & (fb1'=1) &
 		(b1'=1) & (b2'=1) & (b3'=1) &
       		(n11'=0) & (n12'=0) & (n13'=0) & (n14'=0) & (n15'=0) &
       		(n21'=0) & (n22'=0) & (n23'=0) & (n24'=0) &
@@ -184,6 +184,36 @@ module selfish_mining_general_strategy
 
 
   	//consider the states where honest_mined=1
+	
+	// adversary does not publish in response to honest miners
+	[] act=1 & honest_mined=1 -> (act'=0) & (honest_mined'=0) &
+		(fb5'=fb4) & (fb4'=fb3) & (fb3'=fb2) & (fb2'=fb1) & (fb1'=b1) &
+		(b1'=b2) & (b2'=b3) & (b3'=0) &
+      		(n11'=n21) & (n12'=n22) & (n13'=n23) & (n14'=n24) & (n15'=0) &
+      		(n21'=n31) & (n22'=n32) & (n23'=n33) & (n24'=0) &
+      		(n31'=n41) & (n32'=n42) & (n33'=n43) & 
+      		(n41'=0) & (n42'=0) & (n43'=0); //correct!!!!!!!
+
+	// advarsary can release 2 blocks from t4
+	[] act=1 & n42>0 & honest_mined=1 -> (act'=0) & (honest_mined'=0) &
+		(fb5'=fb3) & (fb4'=fb2) & (fb3'=fb1) & (fb2'=b1) & (fb1'=b2) &
+		(b1'=b3) & (b2'=1) & (b3'=1) &
+      		(n11'=n31) & (n12'=n32) & (n13'=n33) & (n14'=0) & (n15'=0) &
+      		(n21'=n41-1) & (n22'=0) & (n23'=0) & (n24'=0) &
+      		(n31'=0) & (n32'=0) & (n33'=0) &
+     		(n41'=min(1,n43)) & (n42'=0) & (n43'=0);  //correct!!!!!!!
+	
+	// advarsary can release 3 blocks from t4
+	[] act=1 & n43>0 & honest_mined=0 -> (act'=0) & (honest_mined'=0) &
+		(fb5'=fb2) & (fb4'=fb1) & (fb3'=b1) & (fb2'=b2) & (fb1'=b3) &
+		(b1'=1) & (b2'=1) & (b3'=1) &
+      		(n11'=n41-1) & (n12'=0) & (n13'=0) & (n14'=0) & (n15'=0) &
+      		(n21'=0) & (n22'=0) & (n23'=0) & (n24'=0) &
+      		(n31'=0) & (n32'=0) & (n33'=0) & 
+      		(n41'=0) & (n42'=0) & (n43'=0);  //correct!!!!!!!
+
+	//  advarsary can release 3 blocks from t3
+
 
 
 endmodule
