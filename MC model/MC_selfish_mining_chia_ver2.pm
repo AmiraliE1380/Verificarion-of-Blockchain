@@ -2,7 +2,7 @@ dtmc
 
 // x is fraction of space controlled by adv.
 const double x = 0.2;
-//y or gamma is the probability of adv wining in a race condition
+//y or gamma is the probability of honest mining on adv blocks during a race condition
 const double y = 0.5;
 // d is the max lead the adv can have
 const int d = 6;
@@ -37,50 +37,38 @@ module SelfishMiningChia
 	honest : [0..2] init 0;
 
 
-	[] n0=0 & n1=0 -> x : (n1'=1) & (h'=1) & (adv'=0) & (honest'=0) +
+	[] h=0 -> x : (n1'=1) & (h'=1) & (adv'=0) & (honest'=0) +
 			(1-x) : (adv'=0) & (honest'=1); //DONE!
 
 
-	[] h = 1 -> ()x : () (1 - x)/total
+	[] h=1 -> (n0+1)*x/total : (n1'=1) & (h'=2) & (adv'=0) & (honest'=0)  +
+			(1-x)/total : (c'=n0) & (n0'=0) & (h'=0) & (adv'=0) & (honest'=0) ; //DONE!
 	
 
-	[] n1>0 & n2=0 -> (1-x)/total : (n0'=n1) & (n1'=0) & (adv'=0) & (honest'=0) +
+	[] c>0 -> (x*c)/(x*c+1-x) : (c'=0) & (adv=2) +
+			(1-x)*y/(x*c+1-x) : (c'=0) & (adv=1) & (honest=1) +
+			(1-x)*(1-y)/(x*c+1-x) : (c'=0) & (honest=2); //DONE!
+	
+
+	[] h=2 -> (1-x)/total : (n0'=0) & (n1'=0) & (n2'=0) & (n3'=0) & (n4'=0) & (n5'=0) & (n6'=0) & (h'=0) & (adv'=2) & (honest'=0) +
 			(n0+1)*x/total : (n1'=min(w,n1+1)) & (adv'=0) & (honest'=0) +
 			n1*x/total : (n2'=min(w,n2+1)) & (adv'=0) & (honest'=0) +
-			n2*x/total : (n3'=min(w,n3+1)) & (adv'=0) & (honest'=0) +
-			n3*x/total : (n4'=min(w,n4+1)) & (adv'=0) & (honest'=0) +
-			n4*x/total : (n5'=min(w,n5+1)) & (adv'=0) & (honest'=0) +
-			n5*x/total : (n6'=min(w,n6+1)) & (adv'=0) & (honest'=0) +
-			n6*x/total : (n0'=n1) & (n1'=n2) & (n2'=n3) & (n3'=n4) &
-					(n4'=n5) & (n5'=n6) & (n6'=1) & (adv'=1)
-					& (honest'=0);
+			n2*x/total : (n3'=min(w,n3+1)) & (h'=max(h, 3)) & (adv'=0) & (honest'=0) +
+			n3*x/total : (n4'=min(w,n4+1)) & (h'=max(h, 4)) & (adv'=0) & (honest'=0) +
+			n4*x/total : (n5'=min(w,n5+1)) & (h'=max(h, 5)) & (adv'=0) & (honest'=0) +
+			n5*x/total : (n6'=min(w,n6+1)) & (h'=max(h, 6)) & (adv'=0) & (honest'=0) +
+			n6*x/total : (n0'=n1) & (n1'=n2) & (n2'=n3) & (n3'=n4) & (n4'=n5) & (n5'=n6) & (n6'=1) & (adv'=1) & (honest'=0); //DONE!
 			
 	
 
-	[] n2>0 & n3=0 -> (1-x)/total : (n0'=0) & (n1'=0) & (n2'=0) & (adv'=2) & (honest'=0) +
+	[] h>2 -> (1-x)/total : (n0'=n1) & (n1'=n2) & (n2'=n3) & (n3'=n4) & (n4'=n5) & (n5'=n6) & (n6'=0) & (h'=h-1) & (adv'=1) & (honest'=0) +
 			(n0+1)*x/total : (n1'=min(w,n1+1)) & (adv'=0) & (honest'=0) +
 			n1*x/total : (n2'=min(w,n2+1)) & (adv'=0) & (honest'=0) +
 			n2*x/total : (n3'=min(w,n3+1)) & (adv'=0) & (honest'=0) +
-			n3*x/total : (n4'=min(w,n4+1)) & (adv'=0) & (honest'=0) +
-			n4*x/total : (n5'=min(w,n5+1)) & (adv'=0) & (honest'=0) +
-			n5*x/total : (n6'=min(w,n6+1)) & (adv'=0) & (honest'=0) +
-			n6*x/total : (n0'=n1) & (n1'=n2) & (n2'=n3) & (n3'=n4) &
-					(n4'=n5) & (n5'=n6) & (n6'=1) & (adv'=1)
-					& (honest'=0);
-
-
-	[] n3>0 -> (1-x)/total : (n0'=n1) & (n1'=n2) & (n2'=n3) & (n3'=n4) & (n4'=n5)
-					& (n5'=n6) & (n6'=0) & (adv'=1) & (honest'=0) +
-			(n0+1)*x/total : (n1'=min(w,n1+1)) & (adv'=0) & (honest'=0) +
-			n1*x/total : (n2'=min(w,n2+1)) & (adv'=0) & (honest'=0) +
-			n2*x/total : (n3'=min(w,n3+1)) & (adv'=0) & (honest'=0) +
-			n3*x/total : (n4'=min(w,n4+1)) & (adv'=0) & (honest'=0) +
-			n4*x/total : (n5'=min(w,n5+1)) & (adv'=0) & (honest'=0) +
-			n5*x/total : (n6'=min(w,n6+1)) & (adv'=0) & (honest'=0) +
-			n6*x/total : (n0'=n1) & (n1'=n2) & (n2'=n3) & (n3'=n4) &
-					(n4'=n5) & (n5'=n6) & (n6'=1) & (adv'=1)
-					& (honest'=0);
-
+			n3*x/total : (n4'=min(w,n4+1)) & (h'=max(h, 4)) & (adv'=0) & (honest'=0) +
+			n4*x/total : (n5'=min(w,n5+1)) & (h'=max(h, 5)) & (adv'=0) & (honest'=0) +
+			n5*x/total : (n6'=min(w,n6+1)) & (h'=max(h, 6)) & (adv'=0) & (honest'=0) +
+			n6*x/total : (n0'=n1) & (n1'=n2) & (n2'=n3) & (n3'=n4) & (n4'=n5) & (n5'=n6) & (n6'=1) & (adv'=1) & (honest'=0); //DONE!
 
 endmodule
 
