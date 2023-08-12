@@ -1,13 +1,13 @@
 dtmc
 
 // x is fraction of space controlled by adv.
-const double x = 0.25;
-//y or gamma is the probability of honest mining on adv blocks during a race condition
+const double x = 0.2;
+//y or gamma is the probability of honest mining on adv blocks during a race condition. 0, 0.25, 0.5, 0.75 and 1 can be tested.
 const double y = 0.5;
 // d is the max lead the adv can have
 const int d = 7;
 // at each depth 4 private blocks can be saved.
-const int w = 1;
+const int w = 6;
 
 
 // n is total number of private adv. blocks	
@@ -45,9 +45,9 @@ module SelfishMiningChia
 			(1-x)/total : (c'=n0) & (n0'=0) & (h'=0) & (adv'=0) & (honest'=0) ; 
 	
 
-	[] c>0 & h=0 -> (x*c)/(x*c+1-x) : (c'=0) & (adv'=2) +
+	[] c>0 & h=0 -> (x*c)/(x*c+1-x) : (c'=0) & (adv'=2) & (honest'=0) +
 			(1-x)*y/(x*c+1-x) : (c'=0) & (adv'=1) & (honest'=1) +
-			(1-x)*(1-y)/(x*c+1-x) : (c'=0) & (honest'=2); 
+			(1-x)*(1-y)/(x*c+1-x) : (c'=0) & (adv'=0) & (honest'=2); 
 	
 
 	[] h=2 & c=0 -> (1-x)/total : (n0'=0) & (n1'=0) & (n2'=0) & (n3'=0) & (n4'=0) & (n5'=0) & (n6'=0) & (h'=0) & (adv'=2) & (honest'=0) +
