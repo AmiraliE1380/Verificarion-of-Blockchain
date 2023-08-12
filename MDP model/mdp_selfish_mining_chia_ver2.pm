@@ -34,6 +34,10 @@ module selfish_mining_general_strategy
  	
  	c41 : [0..d4] init 0;
  	c42 : [0..d4] init 0;
+
+	// In this implementation when a chain is at its maximum length, new blocks will be discarded.
+	// This case will not happend because when a branch reaches its full length, MDP will release it
+	// Because its the best strategy
  	
   	// bi is the status of the public block at deapth 3 - i
   	// if bi=0 the block belongs to honest miner, if bi=1 it belongs to the selfish miner
@@ -118,8 +122,8 @@ module selfish_mining_general_strategy
 
 
 
-	// branch 31
-	// publish the single block of branch 31
+	// branch 31 //Done!
+	// publish the single block of branch 31, race of two single block branches
 	[] act=1 & honest_mined=0 & c31=1 -> x : (act'=0) & (adv'=b1) & (honest'=1-b1) & (b1'=b2) & (b2'=1) & (b3'=1) &
 			(c11'=c21) & (c12'=c22) & (c21'=c32) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
 
@@ -127,9 +131,9 @@ module selfish_mining_general_strategy
 			(c11'=c21) & (c12'=c22) & (c21'=c32) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
 			
 			(1-x)*(1-y) : (act'=0) & (adv'=b1) & (honest'=1-b1) & (b1'=b2) & (b2'=b3) & (b3'=0) &
-			(c11'=c21) & (c12'=c22) & (c21'=c32) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0);
+			(c11'=c21) & (c12'=c22) & (c21'=c31) & (c22'=c32) & (c31'=c41) & (c32'=c42) & (c41'=0) & (c42'=0);
 
-	// consider the case where c31>0 but publishes one block only
+	// consider the case where c31>0 but publishes one block only //????
 
 	// publish 2 blocks from branch 31
 	[] act=1 & & honest_mined=0 & c31>1 -> (act'=0) & (adv'=b1) & (honest'=1-b1) & (b1'=b2) & (b2'=1) & (b3'=1) &
@@ -141,7 +145,7 @@ module selfish_mining_general_strategy
 
 
 
-	// branch 32
+	// branch 32 //Done!
 	// publish the single block of branch 32
 	[] act=1 & honest_mined=0 & c32=1 -> x : (act'=0) & (adv'=b1) & (honest'=1-b1) & (b1'=b2) & (b2'=1) & (b3'=1) &
 			(c11'=c21) & (c12'=c22) & (c21'=c31) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
@@ -150,7 +154,7 @@ module selfish_mining_general_strategy
 			(c11'=c21) & (c12'=c22) & (c21'=c31) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
 			
 			(1-x)*(1-y) : (act'=0) & (adv'=b1) & (honest'=1-b1) & (b1'=b2) & (b2'=b3) & (b3'=0) &
-			(c11'=c21) & (c12'=c22) & (c21'=c31) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0);
+			(c11'=c21) & (c12'=c22) & (c21'=c31) & (c22'=c32) & (c31'=c41) & (c32'=c42) & (c41'=0) & (c42'=0);
 
 	// consider the case where c32>0 but publishes one block only
 
@@ -166,50 +170,55 @@ module selfish_mining_general_strategy
 
 
 
-	// YOU WHERE HERE!
-	// branch 21
+	// branch 21	//Done!
 	// publish two blocks of branch 21
-	[] act=1 & honest_mined=0 & c21=2 -> x : (act'=0) & (adv'=b1) & (honest'=1-b1) & (b1'=b2) & (b2'=1) & (b3'=1) &
-			(c11'=c21) & (c12'=c22) & (c21'=c32) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+	[] act=1 & honest_mined=0 & c21=2 -> x : (act'=0) & (adv'=b1) & (honest'=1-b1) & (b1'=1) & (b2'=1) & (b3'=1) &
+			(c11'=c22) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
 
-			(1-x)*y : (act'=0) & (adv'=b1) & (honest'=1-b1) & (b1'=b2) & (b2'=1) & (b3'=0) &
-			(c11'=c21) & (c12'=c22) & (c21'=c32) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
-			
-			(1-x)*(1-y) : (act'=0) & (adv'=b1) & (honest'=1-b1) & (b1'=b2) & (b2'=1) & (b3'=0) &
-			(c11'=c21) & (c12'=c22) & (c21'=c32) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0);
+			(1-x)*y : (act'=0) & (adv'=b1) & (honest'=1-b1) & (b1'=1) & (b2'=1) & (b3'=0) &
+			(c11'=c22) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
 
-	// consider the case where c31>0 but publishes one block only
+			(1-x)*(1-y) : (act'=0) & (adv'=b1) & (honest'=1-b1) & (b1'=b2) & (b2'=b3) & (b3'=0) &
+			(c11'=c21) & (c12'=c22) & (c21'=c31) & (c22'=c32) & (c31'=c41) & (c32'=c42) & (c41'=0) & (c42'=0);
 
-	// publish 2 blocks from branch 31
-	[] act=1 & & honest_mined=0 & c31>1 -> (act'=0) & (adv'=b1) & (honest'=1-b1) & (b1'=b2) & (b2'=1) & (b3'=1) &
-			(c11'=c21) & (c12'=c22) & (c21'=c32) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=c31-2) & (c42'=0);
 
-	// publish 3 blocks from branch 31
-	[] act=1 & & honest_mined=0 & c31>2 -> (act'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=1) & (b2'=1) & (b3'=1) &
-			(c11'=c32) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0);
+	// publish 3 blocks from branch 21
+	[] act=1 & & honest_mined=0 & c21>2 -> (act'=0) & (adv'=b1) & (honest'=1-b1) & (b1'=1) & (b2'=1) & (b3'=1) &
+			(c11'=c22) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=c21-3) & (c42'=0);
 
-//////////////////////////////////////////////////////////////////////// not completed from here on /////////////////////////////////////////////////////////
+	// publish 4 blocks from branch 21
+	[] act=1 & & honest_mined=0 & c21>3 -> (act'=0) & (adv'=b1+1) & (honest'=2-(b1+1)) & (b1'=1) & (b2'=1) & (b3'=1) &
+			(c11'=0) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0);
 
-	// branch 32
-	// publish the single block of branch 32
-	[] act=1 & honest_mined=0 & c32=0 -> x : (act'=0) & (adv'=b1) & (honest'=1-b1) & (b1'=b2) & (b2'=1) & (b3'=1) &
-			(c11'=c21) & (c12'=c22) & (c21'=c31) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
 
-			(1-x)*y : (act'=0) & (adv'=b1) & (honest'=1-b1) & (b1'=b2) & (b2'=1) & (b3'=0) &
-			(c11'=c21) & (c12'=c22) & (c21'=c31) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
-			
-			(1-x)*(1-y) : (act'=0) & (adv'=b1) & (honest'=1-b1) & (b1'=b2) & (b2'=1) & (b3'=0) &
-			(c11'=c21) & (c12'=c22) & (c21'=c31) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0);
 
-	// consider the case where c32>0 but publishes one block only
 
-	// publish 2 blocks from branch 32
-	[] act=1 & & honest_mined=0 & c32>1 -> (act'=0) & (adv'=b1) & (honest'=1-b1) & (b1'=b2) & (b2'=1) & (b3'=1) &
-			(c11'=c21) & (c12'=c22) & (c21'=c31) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=c31-2) & (c42'=0);
 
-	// publish 3 blocks from branch 32
-	[] act=1 & & honest_mined=0 & c32>2 -> (act'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=1) & (b2'=1) & (b3'=1) &
-			(c11'=c31) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0);
+	// branch 22	//Done!
+	// publish two blocks of branch 22
+	[] act=1 & honest_mined=0 & c21=2 -> x : (act'=0) & (adv'=b1) & (honest'=1-b1) & (b1'=1) & (b2'=1) & (b3'=1) &
+			(c11'=c21) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+
+			(1-x)*y : (act'=0) & (adv'=b1) & (honest'=1-b1) & (b1'=1) & (b2'=1) & (b3'=0) &
+			(c11'=c21) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+
+			(1-x)*(1-y) : (act'=0) & (adv'=b1) & (honest'=1-b1) & (b1'=b2) & (b2'=b3) & (b3'=0) &
+			(c11'=c21) & (c12'=c22) & (c21'=c31) & (c22'=c32) & (c31'=c41) & (c32'=c42) & (c41'=0) & (c42'=0);
+
+
+	// publish 3 blocks from branch 22
+	[] act=1 & & honest_mined=0 & c22>2 -> (act'=0) & (adv'=b1) & (honest'=1-b1) & (b1'=1) & (b2'=1) & (b3'=1) &
+			(c11'=c21) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=c22-3) & (c42'=0);
+
+	// publish 4 blocks from branch 22
+	[] act=1 & & honest_mined=0 & c22>3 -> (act'=0) & (adv'=b1+1) & (honest'=2-(b1+1)) & (b1'=1) & (b2'=1) & (b3'=1) &
+			(c11'=0) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0);
+
+
+
+
+
+
 
 
 
@@ -220,6 +229,6 @@ module selfish_mining_general_strategy
 endmodule
 
 rewards
-	[] honest>0 : honest * (-b);
-	[] adv>0 : adv * (1-b); 
+	[] honest>0 : honest * (-cq);
+	[] adv>0 : adv * (1-cq); 
 endrewards
