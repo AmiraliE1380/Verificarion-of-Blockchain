@@ -92,15 +92,15 @@ module selfish_mining_general_strategy
 
 	// branch 41 //Done!
 	// publish a block from branch 41
-	[] act=1 & & honest_mined=0 & c41>0 -> (act'=0) & (adv'=b1) & (honest'=1-b1) & (b1'=b2) & (b2'=b3) & (b3'=1) &
+	[] act=1 & honest_mined=0 & c41>0 -> (act'=0) & (adv'=b1) & (honest'=1-b1) & (b1'=b2) & (b2'=b3) & (b3'=1) &
 			(c11'=c21) & (c12'=c22) & (c21'=c31) & (c22'=c32) & (c31'=c42) & (c32'=0) & (c41'=c41-1) & (c42'=0);
 
 	// publish 2 blocks from branch 41
-	[] act=1 & & honest_mined=0 & c41>1 -> (act'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=1) & (b3'=1) &
+	[] act=1 & honest_mined=0 & c41>1 -> (act'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=1) & (b3'=1) &
 			(c11'=c31) & (c12'=c32) & (c21'=c42) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=c41-2) & (c42'=0);
 
 	// publish 3 blocks from branch 41
-	[] act=1 & & honest_mined=0 & c41>2 -> (act'=0) & (adv'=b1+b2+b3) & (honest'=3-(b1+b2+b3)) & (b1'=1) & (b2'=1) & (b3'=1) &
+	[] act=1 & honest_mined=0 & c41>2 -> (act'=0) & (adv'=b1+b2+b3) & (honest'=3-(b1+b2+b3)) & (b1'=1) & (b2'=1) & (b3'=1) &
 			(c11'=c42) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0);
 
 
@@ -108,15 +108,15 @@ module selfish_mining_general_strategy
 
 	// branch 42 //Done!
 	// publish a block from branch 42
-	[] act=1 & & honest_mined=0 & c42>0 -> (act'=0) & (adv'=b0) & (honest'=1-b0) & (b1'=b2) & (b2'=b3) & (b3'=1) &
+	[] act=1 & honest_mined=0 & c42>0 -> (act'=0) & (adv'=b0) & (honest'=1-b0) & (b1'=b2) & (b2'=b3) & (b3'=1) &
 			(c11'=c21) & (c12'=c22) & (c21'=c31) & (c22'=c32) & (c31'=c41) & (c32'=0) & (c41'=c42-1) & (c42'=0);
 
 	// publish 2 blocks from branch 42
-	[] act=1 & & honest_mined=0 & c42>1 -> (act'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=1) & (b3'=1) &
+	[] act=1 & honest_mined=0 & c42>1 -> (act'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=1) & (b3'=1) &
 			(c11'=c31) & (c12'=c32) & (c21'=c41) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=c42-2) & (c42'=0);
 
 	// publish 3 blocks from branch 42
-	[] act=1 & & honest_mined=0 & c42>2 -> (act'=0) & (adv'=b1+b2+b3) & (honest'=3-(b1+b2+b3)) & (b1'=1) & (b2'=1) & (b3'=1) &
+	[] act=1 & honest_mined=0 & c42>2 -> (act'=0) & (adv'=b1+b2+b3) & (honest'=3-(b1+b2+b3)) & (b1'=1) & (b2'=1) & (b3'=1) &
 			(c11'=c41) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0);
 
 
@@ -136,11 +136,11 @@ module selfish_mining_general_strategy
 	// consider the case where c31>0 but publishes one block only //????
 
 	// publish 2 blocks from branch 31
-	[] act=1 & & honest_mined=0 & c31>1 -> (act'=0) & (adv'=b1) & (honest'=1-b1) & (b1'=b2) & (b2'=1) & (b3'=1) &
+	[] act=1 & honest_mined=0 & c31>1 -> (act'=0) & (adv'=b1) & (honest'=1-b1) & (b1'=b2) & (b2'=1) & (b3'=1) &
 			(c11'=c21) & (c12'=c22) & (c21'=c32) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=c31-2) & (c42'=0);
 
 	// publish 3 blocks from branch 31
-	[] act=1 & & honest_mined=0 & c31>2 -> (act'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=1) & (b2'=1) & (b3'=1) &
+	[] act=1 & honest_mined=0 & c31>2 -> (act'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=1) & (b2'=1) & (b3'=1) &
 			(c11'=c32) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0);
 
 
@@ -159,11 +159,11 @@ module selfish_mining_general_strategy
 	// consider the case where c32>0 but publishes one block only
 
 	// publish 2 blocks from branch 32
-	[] act=1 & & honest_mined=0 & c32>1 -> (act'=0) & (adv'=b1) & (honest'=1-b1) & (b1'=b2) & (b2'=1) & (b3'=1) &
+	[] act=1 & honest_mined=0 & c32>1 -> (act'=0) & (adv'=b1) & (honest'=1-b1) & (b1'=b2) & (b2'=1) & (b3'=1) &
 			(c11'=c21) & (c12'=c22) & (c21'=c31) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=c31-2) & (c42'=0);
 
 	// publish 3 blocks from branch 32
-	[] act=1 & & honest_mined=0 & c32>2 -> (act'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=1) & (b2'=1) & (b3'=1) &
+	[] act=1 & honest_mined=0 & c32>2 -> (act'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=1) & (b2'=1) & (b3'=1) &
 			(c11'=c31) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0);
 
 
@@ -183,11 +183,11 @@ module selfish_mining_general_strategy
 
 
 	// publish 3 blocks from branch 21
-	[] act=1 & & honest_mined=0 & c21>2 -> (act'=0) & (adv'=b1) & (honest'=1-b1) & (b1'=1) & (b2'=1) & (b3'=1) &
+	[] act=1 & honest_mined=0 & c21>2 -> (act'=0) & (adv'=b1) & (honest'=1-b1) & (b1'=1) & (b2'=1) & (b3'=1) &
 			(c11'=c22) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=c21-3) & (c42'=0);
 
 	// publish 4 blocks from branch 21
-	[] act=1 & & honest_mined=0 & c21>3 -> (act'=0) & (adv'=b1+1) & (honest'=2-(b1+1)) & (b1'=1) & (b2'=1) & (b3'=1) &
+	[] act=1 & honest_mined=0 & c21>3 -> (act'=0) & (adv'=b1+1) & (honest'=2-(b1+1)) & (b1'=1) & (b2'=1) & (b3'=1) &
 			(c11'=0) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0);
 
 
@@ -207,11 +207,61 @@ module selfish_mining_general_strategy
 
 
 	// publish 3 blocks from branch 22
-	[] act=1 & & honest_mined=0 & c22>2 -> (act'=0) & (adv'=b1) & (honest'=1-b1) & (b1'=1) & (b2'=1) & (b3'=1) &
+	[] act=1 & honest_mined=0 & c22>2 -> (act'=0) & (adv'=b1) & (honest'=1-b1) & (b1'=1) & (b2'=1) & (b3'=1) &
 			(c11'=c21) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=c22-3) & (c42'=0);
 
 	// publish 4 blocks from branch 22
-	[] act=1 & & honest_mined=0 & c22>3 -> (act'=0) & (adv'=b1+1) & (honest'=2-(b1+1)) & (b1'=1) & (b2'=1) & (b3'=1) &
+	[] act=1 & honest_mined=0 & c22>3 -> (act'=0) & (adv'=b1+1) & (honest'=2-(b1+1)) & (b1'=1) & (b2'=1) & (b3'=1) &
+			(c11'=0) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0);
+
+
+
+
+
+
+	// branch 11	//Done!
+	// publish 3 blocks of branch 11
+	[] act=1 & honest_mined=0 & c11=3 -> x : (act'=0) & (adv'=1) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=1) &
+			(c11'=0) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+
+			(1-x)*y : (act'=0) & (adv'=1) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=0) &
+			(c11'=0) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+
+			(1-x)*(1-y) : (act'=0) & (adv'=b1) & (honest'=1-b1) & (b1'=b2) & (b2'=b3) & (b3'=0) &
+			(c11'=c21) & (c12'=c22) & (c21'=c31) & (c22'=c32) & (c31'=c41) & (c32'=c42) & (c41'=0) & (c42'=0);
+
+
+	// publish 4 blocks from branch 11
+	[] act=1 & honest_mined=0 & c11>3 -> (act'=0) & (adv'=1) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=1) &
+			(c11'=0) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+
+	// publish 5 blocks from branch 11
+	[] act=1 & honest_mined=0 & c22>4 -> (act'=0) & (adv'=1+1) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=1) &
+			(c11'=0) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0);
+
+
+
+
+
+
+	// branch 12
+	// publish 3 blocks of branch 12
+	[] act=1 & honest_mined=0 & c12=3 -> x : (act'=0) & (adv'=1) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=1) &
+			(c11'=0) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+
+			(1-x)*y : (act'=0) & (adv'=1) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=0) &
+			(c11'=0) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+
+			(1-x)*(1-y) : (act'=0) & (adv'=b1) & (honest'=1-b1) & (b1'=b2) & (b2'=b3) & (b3'=0) &
+			(c11'=c21) & (c12'=c22) & (c21'=c31) & (c22'=c32) & (c31'=c41) & (c32'=c42) & (c41'=0) & (c42'=0);
+
+
+	// publish 4 blocks from branch 12
+	[] act=1 & honest_mined=0 & c12>3 -> (act'=0) & (adv'=1) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=1) &
+			(c11'=0) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+
+	// publish 5 blocks from branch 12
+	[] act=1 & honest_mined=0 & c12>4 -> (act'=0) & (adv'=1+1) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=1) &
 			(c11'=0) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0);
 
 
@@ -221,7 +271,8 @@ module selfish_mining_general_strategy
 
 
 
-
+	// Actions after honest mined and honest_mined=1
+	//[] act=0 
 
 
 	
