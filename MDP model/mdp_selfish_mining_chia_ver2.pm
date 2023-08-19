@@ -108,7 +108,7 @@ module selfish_mining_general_strategy
 
 	// branch 42 //Done!
 	// publish a block from branch 42
-	[] act=1 & honest_mined=0 & c42>0 -> (act'=0) & (adv'=b0) & (honest'=1-b0) & (b1'=b2) & (b2'=b3) & (b3'=1) &
+	[] act=1 & honest_mined=0 & c42>0 -> (act'=0) & (adv'=b1) & (honest'=1-b1) & (b1'=b2) & (b2'=b3) & (b3'=1) &
 			(c11'=c21) & (c12'=c22) & (c21'=c31) & (c22'=c32) & (c31'=c41) & (c32'=0) & (c41'=c42-1) & (c42'=0);
 
 	// publish 2 blocks from branch 42
@@ -233,7 +233,7 @@ module selfish_mining_general_strategy
 
 	// publish 4 blocks from branch 11
 	[] act=1 & honest_mined=0 & c11>3 -> (act'=0) & (adv'=1) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=1) &
-			(c11'=0) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+			(c11'=0) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0);
 
 	// publish 5 blocks from branch 11
 	[] act=1 & honest_mined=0 & c22>4 -> (act'=0) & (adv'=1+1) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=1) &
@@ -258,7 +258,7 @@ module selfish_mining_general_strategy
 
 	// publish 4 blocks from branch 12
 	[] act=1 & honest_mined=0 & c12>3 -> (act'=0) & (adv'=1) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=1) &
-			(c11'=0) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+			(c11'=0) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0);
 
 	// publish 5 blocks from branch 12
 	[] act=1 & honest_mined=0 & c12>4 -> (act'=0) & (adv'=1+1) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=1) &
@@ -412,7 +412,7 @@ module selfish_mining_general_strategy
 
 
 
-	// branch 11
+	// branch 11	// Done!
 	// publish 4 blocks from branch 11
 	[] act=1 & honest_mined=1 & c11=4 -> x : (act'=0) & (honest_mined'=0) & (adv'=2) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=1) &
 			(c11'=0) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
@@ -432,7 +432,7 @@ module selfish_mining_general_strategy
 
 
 
-	// branch 12
+	// branch 12	// Done!
 	// publish 4 blocks from branch 12
 	[] act=1 & honest_mined=1 & c12=4 -> x : (act'=0) & (honest_mined'=0) & (adv'=2) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=1) &
 			(c11'=0) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
