@@ -1,11 +1,11 @@
 mdp
 
 // x is fraction of space controlled by adv.
-const double x = 0.2;
+const double x = 0.05;
 //y or gamma is the probability of honest mining on adv blocks during a race condition
-const double y = 0.5;
+const double y = 1;
 //cq is chain quality, will initially be set to 0.5 and will estimate the real value after 10 steps
-const double cq = 0.5;
+const double cq = 0.898;
 
 
 // di is the max deapth of chains/branches at deapth 4-i of the public chain
@@ -58,31 +58,28 @@ module selfish_mining_general_strategy
 	
 
 
-  	[] act=0 -> (1-x)/total : (honest_mined'=1) & (act'=1) & (adv'=0) & (honest'=0);
+	// fix this part
+  	[] act=0 -> (1-x)/total : (honest_mined'=1) & (act'=1) & (adv'=0) & (honest'=0) +
 	
 
-	[] act=0 & c11=0 -> 1*x/total : (c11'=1) & (act'=1) & (adv'=0) & (honest'=0);
+	1*x/total : (c11'=min(d1,c11+1)) & (honest_mined'=0) & (act'=1) & (adv'=0) & (honest'=0) +
 
-	[] act=0 & c11>0 -> 1*x/total : (c11'=min(d1,c11+1)) & (act'=1) & (adv'=0) & (honest'=0) +
-			1*x/total : (c12'=min(d1,c12+1)) & (act'=1) & (adv'=0) & (honest'=0);
+			1*x/total *min(c11,1) : (c12'=min(d1,c12+1)) & (honest_mined'=0) & (act'=1) & (adv'=0) & (honest'=0) +
 	
 
-	[] act=0 & c21=0 -> 1*x/total : (c21'=1) & (act'=1) & (adv'=0) & (honest'=0);
+	1*x/total : (c21'=min(d2,c21+1)) & (honest_mined'=0) & (act'=1) & (adv'=0) & (honest'=0) +
 
-	[] act=0 & c21>0 -> 1*x/total : (c21'=min(d2,c21+1)) & (act'=1) & (adv'=0) & (honest'=0) +
-			1*x/total : (c22'=min(d2,c22+1)) & (act'=1) & (adv'=0) & (honest'=0);
+			1*x/total *min(c21,1) : (c22'=min(d2,c22+1)) & (honest_mined'=0) & (act'=1) & (adv'=0) & (honest'=0) +
 	
 	
-	[] act=0 & c31=0 -> 1*x/total : (c31'=1) & (act'=1) & (adv'=0) & (honest'=0);
+	1*x/total : (c31'=min(d3,c31+1)) & (honest_mined'=0) & (act'=1) & (adv'=0) & (honest'=0) +
 
-	[] act=0 & c31>0 -> 1*x/total : (c31'=min(d3,c31+1)) & (act'=1) & (adv'=0) & (honest'=0) +
-			1*x/total : (c32'=min(d3,c32+1)) & (act'=1) & (adv'=0) & (honest'=0);
+			1*x/total *min(c31,1) : (c32'=min(d3,c32+1)) & (honest_mined'=0) & (act'=1) & (adv'=0) & (honest'=0) +
 	
 
-	[] act=0 & c41=0 -> 1*x/total : (c41'=1) & (act'=1) & (adv'=0) & (honest'=0);
+	1*x/total : (c41'=min(d4,c41+1)) & (honest_mined'=0) & (act'=1) & (adv'=0) & (honest'=0) +
 
-	[] act=0 & c41>0 -> 1*x/total : (c41'=min(d4,c41+1)) & (act'=1) & (adv'=0) & (honest'=0) +
-			1*x/total : (c42'=min(d4,c42+1)) & (act'=1) & (adv'=0) & (honest'=0);
+			1*x/total  *min(c41,1) : (c42'=min(d4,c42+1)) & (honest_mined'=0) & (act'=1) & (adv'=0) & (honest'=0);
 	
 
 	// TODO: MAYBE NEED TO CHANGE THIS
@@ -451,7 +448,12 @@ module selfish_mining_general_strategy
 
 endmodule
 
+//rewards
+//	[] true : honest;// * (1-cq);
+	//[] true : adv;// * (-cq);
+//endrewards
+
 rewards
-	[] honest>0 : honest * (-cq);
-	[] adv>0 : adv * (1-cq); 
+	[] true : honest * (1-cq);
+	[] true : adv * (-cq);
 endrewards
