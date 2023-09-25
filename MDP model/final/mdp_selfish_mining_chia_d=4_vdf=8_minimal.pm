@@ -231,7 +231,7 @@ module selfish_mining_general_strategy
 
 	// branch 22	//Done!
 	// publish two blocks of branch 22
-	[] act=1 & honest_mined=0 & c21=2 -> x : (act'=0) & (adv'=b1) & (honest'=1-b1) & (b1'=1) & (b2'=1) & (b3'=1) &
+	[] act=1 & honest_mined=0 & c22=2 -> x : (act'=0) & (adv'=b1) & (honest'=1-b1) & (b1'=1) & (b2'=1) & (b3'=1) &
 			(c11'=c21) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
 
 			(1-x)*y : (act'=0) & (adv'=b1) & (honest'=1-b1) & (b1'=1) & (b2'=1) & (b3'=0) &
