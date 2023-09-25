@@ -5,11 +5,11 @@ const double x = 0.2;
 //y or gamma is the probability of honest mining on adv blocks during a race condition
 const double y = 0;
 //cq is chain quality, will initially be set to 0.5 and will estimate the real value after 10 steps
-const double cq = 0.7105;
+const double cq = 0.7155;
 
 
 // max deapth of chains/branches
-const int d = 5;
+const int d = 3;
 
 
 // n is total number of blocks adv. mines on, including 4 blocks in the public chain
