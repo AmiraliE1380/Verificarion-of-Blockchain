@@ -56,7 +56,7 @@ module selfish_mining_general_strategy
 	
 
 
-  	[] honest_mined=0 -> (1-x)/total : (honest_mined'=1) & (adv'=0) & (honest'=0) +
+  	[] true -> (1-x)/total : (honest_mined'=1) & (adv'=0) & (honest'=0) +
 		1*x/total : (c11'=min(d,c11+1)) & (honest_mined'=0) & (adv'=0) & (honest'=0) +
 				1*x/total *min(c11,1) : (c12'=min(d,c12+1)) & (honest_mined'=0) & (adv'=0) & (honest'=0) +
 		1*x/total : (c21'=min(d,c21+1)) & (honest_mined'=0) & (adv'=0) & (honest'=0) +
@@ -102,7 +102,7 @@ module selfish_mining_general_strategy
 
 
 	// publish 2 blocks from branch 41
-	[] honest_mined=0 & c41>1 -> 
+	[] c41>1 -> 
 		(1-x)/total : (honest_mined'=1) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=1) & (b3'=1) &
 					(c11'=c31) & (c12'=c32) & (c21'=c42) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=c41-2) & (c42'=0) +
 		
@@ -136,7 +136,7 @@ module selfish_mining_general_strategy
 	
 
 	// publish 3 blocks from branch 41
-	[] honest_mined=0 & c41>2 -> 
+	[] c41>2 -> 
 		(1-x)/total : (honest_mined'=1) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=1) & (b3'=1) &
 					(c11'=c42) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=c41-3) & (c42'=0) +
 		
@@ -173,7 +173,7 @@ module selfish_mining_general_strategy
 	
 	// new
 	// publish 4 blocks from branch 41
-	[] honest_mined=0 & c41>3 -> (adv'=b1+b2+b3+1) & (honest'=4-(b1+b2+b3+1)) & (b1'=1) & (b2'=1) & (b3'=1) &
+	[] c41>3 -> (adv'=b1+b2+b3+1) & (honest'=4-(b1+b2+b3+1)) & (b1'=1) & (b2'=1) & (b3'=1) &
 					(c11'=0) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
 		
 		1*x/total : (c11'=min(d,c42+1)) & (adv'=b1+b2+b3+1) & (honest'=4-(b1+b2+b3+1)) & (b1'=1) & (b2'=1) & (b3'=1) &
@@ -194,7 +194,7 @@ module selfish_mining_general_strategy
 		1*x/total *min(c31,1) : (c32'=1) & (adv'=b1+b2+b3+1) & (honest'=4-(b1+b2+b3+1)) & (b1'=1) & (b2'=1) & (b3'=1) &
 					(c11'=0) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c41'=0) & (c42'=0)+
 		
-		1*x/total : (c41'=c41-2) & (adv'=b1+b2+b3+1) & (honest'=4-(b1+b2+b3+1)) & (b1'=1) & (b2'=1) & (b3'=1) &
+		1*x/total : (c41'=1) & (adv'=b1+b2+b3+1) & (honest'=4-(b1+b2+b3+1)) & (b1'=1) & (b2'=1) & (b3'=1) &
 					(c11'=0) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c42'=0) +
 		
 		1*x/total  *min(c41,1) : (c42'=1) & (adv'=b1+b2+b3+1) & (honest'=4-(b1+b2+b3+1)) & (b1'=1) & (b2'=1) & (b3'=1) &
@@ -241,7 +241,7 @@ module selfish_mining_general_strategy
 
 
 	// publish 2 blocks from branch 42
-	[] honest_mined=0 & c42>1 -> 
+	[] c42>1 -> 
 		(1-x)/total : (honest_mined'=1) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=1) & (b3'=1) &
 					(c11'=c31) & (c12'=c32) & (c21'=c41) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=c42-2) & (c42'=0) +
 		
@@ -274,7 +274,7 @@ module selfish_mining_general_strategy
 	
 
 	// publish 3 blocks from branch 42
-	[] honest_mined=0 & c42>2 ->(honest_mined'=1) & (adv'=b1+b2+b3) & (honest'=3-(b1+b2+b3)) & (b1'=1) & (b2'=1) & (b3'=1) &
+	[] c42>2 ->(honest_mined'=1) & (adv'=b1+b2+b3) & (honest'=3-(b1+b2+b3)) & (b1'=1) & (b2'=1) & (b3'=1) &
 					(c11'=c41) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=c42-3) & (c42'=0) +
 		
 		1*x/total : (c11'=min(d,c41+1)) & (honest_mined'=0) & (adv'=b1+b2+b3) & (honest'=3-(b1+b2+b3)) & (b1'=1) & (b2'=1) & (b3'=1) &
@@ -310,7 +310,7 @@ module selfish_mining_general_strategy
 	
 	// new
 	// publish 4 blocks from branch 42
-	[] honest_mined=0 & c42>3 -> 
+	[] c42>3 -> 
 		(1-x)/total : (honest_mined'=1) & (adv'=b1+b2+b3+1) & (honest'=4-(b1+b2+b3+1)) & (b1'=1) & (b2'=1) & (b3'=1) &
 					(c11'=0) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
 		
@@ -332,7 +332,7 @@ module selfish_mining_general_strategy
 		1*x/total *min(c31,1) : (c32'=1) & (honest_mined'=0) & (adv'=b1+b2+b3+1) & (honest'=4-(b1+b2+b3+1)) & (b1'=1) & (b2'=1) & (b3'=1) &
 					(c11'=0) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c41'=0) & (c42'=0)+
 		
-		1*x/total : (c41'=c41-2) & (honest_mined'=0) & (adv'=b1+b2+b3+1) & (honest'=4-(b1+b2+b3+1)) & (b1'=1) & (b2'=1) & (b3'=1) &
+		1*x/total : (c41'=1) & (honest_mined'=0) & (adv'=b1+b2+b3+1) & (honest'=4-(b1+b2+b3+1)) & (b1'=1) & (b2'=1) & (b3'=1) &
 					(c11'=0) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c42'=0) +
 		
 		1*x/total  *min(c41,1) : (c42'=1) & (honest_mined'=0) & (adv'=b1+b2+b3+1) & (honest'=4-(b1+b2+b3+1)) & (b1'=1) & (b2'=1) & (b3'=1) &
@@ -493,7 +493,7 @@ module selfish_mining_general_strategy
 	
 	
 	// publish 3 blocks from branch 31
-	[] honest_mined=0 & c31>2 ->
+	[] c31>2 ->
 					(1-x)/total : (honest_mined'=1) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=1) & (b2'=1) & (b3'=1) &
 								(c11'=c32) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=c31-3) & (c42'=0) +
 					
@@ -530,7 +530,7 @@ module selfish_mining_general_strategy
 
 	// new
 	// publish 4 blocks from branch 31
-	[] honest_mined=0 & c31>3 ->
+	[] & c31>3 ->
 					(1-x)/total : (honest_mined'=1) & (adv'=b1+b2+1) & (honest'=3-(b1+b2+1)) & (b1'=1) & (b2'=1) & (b3'=1) &
 								(c11'=0) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
 					
@@ -711,7 +711,7 @@ module selfish_mining_general_strategy
 	
 	
 	// publish 3 blocks from branch 32
-	[] act=1 & honest_mined=0 & c32>2 -> 
+	[] c32>2 -> 
 					(1-x)/total : (honest_mined'=1) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=1) & (b2'=1) & (b3'=1) &
 								(c11'=c31) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=c32-3) & (c42'=0) +
 					
@@ -750,7 +750,7 @@ module selfish_mining_general_strategy
 
 	// new
 	// publish 4 blocks from branch 32
-	[] act=1 & honest_mined=0 & c32>3 -> (1-x)/total : (honest_mined'=1) & (adv'=b1+b2+1) & (honest'=3-(b1+b2+1)) & (b1'=1) & (b2'=1) & (b3'=1) &
+	[] c32>3 -> (1-x)/total : (honest_mined'=1) & (adv'=b1+b2+1) & (honest'=3-(b1+b2+1)) & (b1'=1) & (b2'=1) & (b3'=1) &
 								(c11'=0) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
 					
 					1*x/total : (c11'=1) & (honest_mined'=0) & (adv'=b1+b2+1) & (honest'=3-(b1+b2+1)) & (b1'=1) & (b2'=1) & (b3'=1) &
@@ -929,7 +929,7 @@ module selfish_mining_general_strategy
 	
 
 	// publish 4 blocks from branch 21
-	[] act=1 & honest_mined=0 & c21>3 -> 
+	[] c21>3 -> 
 					(1-x)/total : (honest_mined'=1) & (adv'=b1+1) & (honest'=2-(b1+1)) & (b1'=1) & (b2'=1) & (b3'=1) &
 								(c11'=0) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
 					
@@ -969,7 +969,7 @@ module selfish_mining_general_strategy
 
 	// branch 22	//Done!
 	// publish two blocks of branch 22
-	[] act=1 & honest_mined=0 & c22=2 ->
+	[] honest_mined=0 & c22=2 ->
 					x*(1-x)/total : (honest_mined'=1) & (adv'=b1) & (honest'=1-b1) & (b1'=1) & (b2'=1) & (b3'=1) &
 								(c11'=c21) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
 					
@@ -1067,7 +1067,7 @@ module selfish_mining_general_strategy
 	
 
 	// publish 3 blocks from branch 22
-	[] act=1 & honest_mined=0 & c22>2 -> 
+	[] honest_mined=0 & c22>2 -> 
 					(1-x)/total : (honest_mined'=1) & (adv'=b1) & (honest'=1-b1) & (b1'=1) & (b2'=1) & (b3'=1) &
 								(c11'=c21) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=c21-3) & (c42'=0) +
 					
@@ -1099,7 +1099,7 @@ module selfish_mining_general_strategy
 	
 	
 	// publish 4 blocks from branch 22
-	[] act=1 & honest_mined=0 & c22>3 -> 
+	[] c22>3 -> 
 					(1-x)/total : (honest_mined'=1) & (adv'=b1+1) & (honest'=2-(b1+1)) & (b1'=1) & (b2'=1) & (b3'=1) &
 								(c11'=0) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
 					
@@ -1134,7 +1134,7 @@ module selfish_mining_general_strategy
 
 	// branch 11	//Done!
 	// publish 3 blocks of branch 11
-	[] act=1 & honest_mined=0 & c11=3 -> 
+	[] honest_mined=0 & c11=3 -> 
 					x*(1-x)/total : (honest_mined'=1) & (adv'=1) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=1) &
 								(c11'=0) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
 					
@@ -1167,31 +1167,31 @@ module selfish_mining_general_strategy
 
 
 
-					x*(1-x)/total : (honest_mined'=1) & (adv'=1) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=0) &
+					(1-x)*y*(1-x)/total : (honest_mined'=1) & (adv'=1) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=0) &
 								(c11'=0) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
 					
-					x*1*x/total : (c11'=1) & (honest_mined'=0) & (adv'=1) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=0) &
+					(1-x)*y*x/total : (c11'=1) & (honest_mined'=0) & (adv'=1) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=0) &
 								(c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
 					
-					x*1*x/total *min(c11,1) : (c12'=1) & (honest_mined'=0) & (adv'=1) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=0) &
+					(1-x)*y*x/total *min(c11,1) : (c12'=1) & (honest_mined'=0) & (adv'=1) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=0) &
 								(c11'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0)) +
 					
-					x*1*x/total : (c21'=1) & (honest_mined'=0) & (adv'=1) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=0) &
+					(1-x)*y*x/total : (c21'=1) & (honest_mined'=0) & (adv'=1) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=0) &
 								(c11'=0) & (c12'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
 					
-					x*1*x/total *min(c21,1) : (c22'=1) & (honest_mined'=0) & (adv'=1) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=0) &
+					(1-x)*y*x/total *min(c21,1) : (c22'=1) & (honest_mined'=0) & (adv'=1) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=0) &
 								(c11'=0) & (c12'=0) & (c21'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
 					
-					x*1*x/total : (c31'=1) & (honest_mined'=0) & (adv'=1) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=0) &
+					(1-x)*y*x/total : (c31'=1) & (honest_mined'=0) & (adv'=1) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=0) &
 								(c11'=0) & (c12'=0) & (c21'=0) & (c22'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
 					
-					x*1*x/total *min(c31,1) : (c32'=1) & (honest_mined'=0) & (adv'=1) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=0) &
+					(1-x)*y*x/total *min(c31,1) : (c32'=1) & (honest_mined'=0) & (adv'=1) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=0) &
 								(c11'=0) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c41'=0) & (c42'=0) +
 					
-					x*1*x/total : (c41'=1) & (honest_mined'=0) & (adv'=1) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=0) &
+					(1-x)*y*x/total : (c41'=1) & (honest_mined'=0) & (adv'=1) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=0) &
 								(c11'=0) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c42'=0) +
 					
-					x*1*x/total  *min(c41,1) : (c42'=1) & (honest_mined'=0) & (adv'=1) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=0) &
+					(1-x)*y*x/total  *min(c41,1) : (c42'=1) & (honest_mined'=0) & (adv'=1) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=0) &
 								(c11'=0) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0);
 	
 
@@ -1303,31 +1303,31 @@ module selfish_mining_general_strategy
 
 
 
-					x*(1-x)/total : (honest_mined'=1) & (adv'=1) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=0) &
+					(1-x)*y*(1-x)/total : (honest_mined'=1) & (adv'=1) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=0) &
 								(c11'=0) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
 					
-					x*1*x/total : (c11'=1) & (honest_mined'=0) & (adv'=1) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=0) &
+					(1-x)*y*x/total : (c11'=1) & (honest_mined'=0) & (adv'=1) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=0) &
 								(c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
 					
-					x*1*x/total *min(c11,1) : (c12'=1) & (honest_mined'=0) & (adv'=1) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=0) &
+					(1-x)*y*x/total *min(c11,1) : (c12'=1) & (honest_mined'=0) & (adv'=1) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=0) &
 								(c11'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0)) +
 					
-					x*1*x/total : (c21'=1) & (honest_mined'=0) & (adv'=1) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=0) &
+					(1-x)*y*x/total : (c21'=1) & (honest_mined'=0) & (adv'=1) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=0) &
 								(c11'=0) & (c12'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
 					
-					x*1*x/total *min(c21,1) : (c22'=1) & (honest_mined'=0) & (adv'=1) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=0) &
+					(1-x)*y*x/total *min(c21,1) : (c22'=1) & (honest_mined'=0) & (adv'=1) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=0) &
 								(c11'=0) & (c12'=0) & (c21'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
 					
-					x*1*x/total : (c31'=1) & (honest_mined'=0) & (adv'=1) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=0) &
+					(1-x)*y*x/total : (c31'=1) & (honest_mined'=0) & (adv'=1) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=0) &
 								(c11'=0) & (c12'=0) & (c21'=0) & (c22'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
 					
-					x*1*x/total *min(c31,1) : (c32'=1) & (honest_mined'=0) & (adv'=1) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=0) &
+					(1-x)*y*x/total *min(c31,1) : (c32'=1) & (honest_mined'=0) & (adv'=1) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=0) &
 								(c11'=0) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c41'=0) & (c42'=0) +
 					
-					x*1*x/total : (c41'=1) & (honest_mined'=0) & (adv'=1) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=0) &
+					(1-x)*y*x/total : (c41'=1) & (honest_mined'=0) & (adv'=1) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=0) &
 								(c11'=0) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c42'=0) +
 					
-					x*1*x/total  *min(c41,1) : (c42'=1) & (honest_mined'=0) & (adv'=1) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=0) &
+					(1-x)*y*x/total  *min(c41,1) : (c42'=1) & (honest_mined'=0) & (adv'=1) & (honest'=0) & (b1'=1) & (b2'=1) & (b3'=0) &
 								(c11'=0) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0);
 	
 
@@ -1404,38 +1404,105 @@ module selfish_mining_general_strategy
 
 	// Actions after honest mined and honest_mined=1
 
-	// Dont publish, accept new honest block
-	[] act=1 & honest_mined=1 -> (act'=0) & (honest_mined'=0) & (adv'=b1) & (honest'=1-b1) & (b1'=b2) & (b2'=b3) & (b3'=0) &
-			(c11'=c21) & (c12'=c22) & (c21'=c31) & (c22'=c32) & (c31'=c41) & (c32'=c42) & (c41'=0) & (c42'=0); //does not publish
-
 
 
 
 	// branch 41	//Done!
 	// publish 1 block from branch 41
-	[] act=1 & honest_mined=1 & c41=1 -> x : (act'=0) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=1) & (b3'=1) &
-			(c11'=c31) & (c12'=c32) & (c21'=c42) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+	[] honest_mined=1 & c41=1 ->
+				x*(1-x)/total : (honest_mined'=1) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=1) & (b3'=1) &
+							(c11'=c31) & (c12'=c32) & (c21'=c42) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+				
+				x*1*x/total : (c11'=min(d,c31+1)) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=1) & (b3'=1) &
+							(c12'=c32) & (c21'=c42) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+				
+				x*1*x/total *min(c11,1) : (c12'=min(d,c32+1)) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=1) & (b3'=1) &
+							(c11'=c31) & (c21'=c42) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+				
+				x*1*x/total : (c21'=min(d,c42+1)) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=1) & (b3'=1) &
+							(c11'=c31) & (c12'=c32) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+				
+				x*1*x/total *min(c21,1) : (c22'=1) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=1) & (b3'=1) &
+							(c11'=c31) & (c12'=c32) & (c21'=c42) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+				
+				x*1*x/total : (c31'=1) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=1) & (b3'=1) &
+							(c11'=c31) & (c12'=c32) & (c21'=c42) & (c22'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+				
+				x*1*x/total *min(c31,1) : (c32'=1) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=1) & (b3'=1) &
+							(c11'=c31) & (c12'=c32) & (c21'=c42) & (c22'=0) & (c31'=0) & (c41'=0) & (c42'=0)+
+				
+				x*1*x/total : (c41'=c41-1) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=1) & (b3'=1) &
+							(c11'=c31) & (c12'=c32) & (c21'=c42) & (c22'=0) & (c31'=0) & (c32'=0) & (c42'=0) +
+				
+				x*1*x/total  *min(c41,1) : (c42'=1) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=1) & (b3'=1) &
+							(c11'=c31) & (c12'=c32) & (c21'=c42) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0);
 
-			(1-x)*y : (act'=0) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=1) & (b3'=0) &
-			(c11'=c31) & (c12'=c32) & (c21'=c42) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+	
 
-			(1-x)*(1-y) : (act'=0) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=0) & (b3'=0) &
-			(c11'=c31) & (c12'=c32) & (c21'=c41) & (c22'=c42) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0);
+	
+	
+				(1-x)*y*(1-x)/total : (honest_mined'=1) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=1) & (b3'=0) &
+							(c11'=c31) & (c12'=c32) & (c21'=c42) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+				
+				(1-x)*y*x/total : (c11'=min(d,c31+1)) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=1) & (b3'=0) &
+							(c12'=c32) & (c21'=c42) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+				
+				(1-x)*y*x/total *min(c11,1) : (c12'=min(d,c32+1)) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=1) & (b3'=0) &
+							(c11'=c31) & (c21'=c42) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+				
+				(1-x)*y*x/total : (c21'=min(d,c42+1)) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=1) & (b3'=0) &
+							(c11'=c31) & (c12'=c32) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+				
+				(1-x)*y*x/total *min(c21,1) : (c22'=1) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=1) & (b3'=0) &
+							(c11'=c31) & (c12'=c32) & (c21'=c42) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+				
+				(1-x)*y*x/total : (c31'=1) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=1) & (b3'=0) &
+							(c11'=c31) & (c12'=c32) & (c21'=c42) & (c22'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+				
+				(1-x)*y*x/total *min(c31,1) : (c32'=1) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=1) & (b3'=0) &
+							(c11'=c31) & (c12'=c32) & (c21'=c42) & (c22'=0) & (c31'=0) & (c41'=0) & (c42'=0)+
+				
+				(1-x)*y*x/total : (c41'=c41-1) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=1) & (b3'=0) &
+							(c11'=c31) & (c12'=c32) & (c21'=c42) & (c22'=0) & (c31'=0) & (c32'=0) & (c42'=0) +
+				
+				(1-x)*y*x/total  *min(c41,1) : (c42'=1) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=1) & (b3'=0) &
+							(c11'=c31) & (c12'=c32) & (c21'=c42) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0);
 
-	// publish 2 blocks from branch 41
-	[] act=1 & honest_mined=1 & c41>1 -> (act'=0) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=1) & (b3'=1) &
-			(c11'=c31) & (c12'=c32) & (c21'=c42) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=c41-2) & (c42'=0);
-
-	// publish 3 blocks from branch 41
-	[] act=1 & honest_mined=1 & c41>2 -> (act'=0) & (honest_mined'=0) & (adv'=b1+b2+b3) & (honest'=3-(b1+b2+b3)) & (b1'=1) & (b2'=1) & (b3'=1) &
-			(c11'=c42) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0);
+	
 
 
 
-	// new
-	// publish 4 blocks from branch 41
-	[] act=1 & honest_mined=1 & c41>3 -> (act'=0) & (honest_mined'=0) & (adv'=b1+b2+b3+1) & (honest'=4-(b1+b2+b3+1)) & (b1'=1) & (b2'=1) & (b3'=1) &
-			(c11'=0) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0);
+	
+	
+				(1-x)*(1-y)*(1-x)/total : (honest_mined'=1) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=0) & (b3'=0) &
+							(c11'=c31) & (c12'=c32) & (c21'=c41) & (c22'=c42) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+				
+				(1-x)*(1-y)*x/total : (c11'=min(d,c31+1)) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=0) & (b3'=0) &
+							(c12'=c32) & (c21'=c41) & (c22'=c42) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+				
+				(1-x)*(1-y)*x/total *min(c11,1) : (c12'=min(d,c32+1)) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=0) & (b3'=0) &
+							(c11'=c31) & (c21'=c41) & (c22'=c42) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+				
+				(1-x)*(1-y)*x/total : (c21'=min(d,c41+1)) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=0) & (b3'=0) &
+							(c11'=c31) & (c12'=c32) & (c22'=c42) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+				
+				(1-x)*(1-y)*x/total *min(c21,1) : (c22'=min(d,c42+1)) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=0) & (b3'=0) &
+							(c11'=c31) & (c12'=c32) & (c21'=c41) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+				
+				(1-x)*(1-y)*x/total : (c31'=1) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=0) & (b3'=0) &
+							(c12'=c32) & (c21'=c41) & (c22'=c42) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+				
+				(1-x)*(1-y)*x/total *min(c31,1) : (c32'=1) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=0) & (b3'=0) &
+							(c11'=c31) & (c12'=c32) & (c21'=c41) & (c22'=c42) & (c31'=0) & (c41'=0) & (c42'=0) +
+				
+				(1-x)*(1-y)*x/total : (c41'=c41-1) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=0) & (b3'=0) &
+							(c11'=c31) & (c12'=c32) & (c21'=c41) & (c22'=c42) & (c31'=0) & (c32'=0) & (c42'=0) +
+				
+				(1-x)*(1-y)*x/total  *min(c41,1) : (c42'=1) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=0) & (b3'=0) &
+							(c11'=c31) & (c12'=c32) & (c21'=c41) & (c22'=c42) & (c31'=0) & (c32'=0) & (c41'=0);
+
+	
+
 
 
 
@@ -1443,58 +1510,217 @@ module selfish_mining_general_strategy
 
 	// branch 42	//Done!
 	// publish 1 block from branch 42
-	[] act=1 & honest_mined=1 & c42=1 -> x : (act'=0) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=1) & (b3'=1) &
-			(c11'=c31) & (c12'=c32) & (c21'=c41) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
-
-			(1-x)*y : (act'=0) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=1) & (b3'=0) &
-			(c11'=c31) & (c12'=c32) & (c21'=c41) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
-
-			(1-x)*(1-y) : (act'=0) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=0) & (b3'=0) &
-			(c11'=c31) & (c12'=c32) & (c21'=c41) & (c22'=c42) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0);
-
-	// publish 2 blocks from branch 42
-	[] act=1 & honest_mined=1 & c42>1 -> (act'=0) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=1) & (b3'=1) &
-			(c11'=c31) & (c12'=c32) & (c21'=c41) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=c41-2) & (c42'=0);
-
-	// publish 3 blocks from branch 42
-	[] act=1 & honest_mined=1 & c42>2 -> (act'=0) & (honest_mined'=0) & (adv'=b1+b2+b3) & (honest'=3-(b1+b2+b3)) & (b1'=1) & (b2'=1) & (b3'=1) &
-			(c11'=c41) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0);
-
-
-
-	// new
-	// publish 4 blocks from branch 42
-	[] act=1 & honest_mined=1 & c41>3 -> (act'=0) & (honest_mined'=0) & (adv'=b1+b2+b3+1) & (honest'=4-(b1+b2+b3+1)) & (b1'=1) & (b2'=1) & (b3'=1) &
-			(c11'=0) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0);
+	[] honest_mined=1 & c42=1 ->
+				x*(1-x)/total : (honest_mined'=1) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=1) & (b3'=1) &
+							(c11'=c31) & (c12'=c32) & (c21'=c41) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+				
+				x*1*x/total : (c11'=min(d,c31+1)) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=1) & (b3'=1) &
+							(c12'=c32) & (c21'=c41) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+				
+				x*1*x/total *min(c11,1) : (c12'=min(d,c32+1)) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=1) & (b3'=1) &
+							(c11'=c31) & (c21'=c41) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+				
+				x*1*x/total : (c21'=min(d,c41+1)) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=1) & (b3'=1) &
+							(c11'=c31) & (c12'=c32) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+				
+				x*1*x/total *min(c21,1) : (c22'=1) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=1) & (b3'=1) &
+							(c11'=c31) & (c12'=c32) & (c21'=c41) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+				
+				x*1*x/total : (c31'=1) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=1) & (b3'=1) &
+							(c11'=c31) & (c12'=c32) & (c21'=c41) & (c22'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+				
+				x*1*x/total *min(c31,1) : (c32'=1) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=1) & (b3'=1) &
+							(c11'=c31) & (c12'=c32) & (c21'=c41) & (c22'=0) & (c31'=0) & (c41'=0) & (c42'=0)+
+				
+				x*1*x/total : (c41'=c41-1) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=1) & (b3'=1) &
+							(c11'=c31) & (c12'=c32) & (c21'=c41) & (c22'=0) & (c31'=0) & (c32'=0) & (c42'=0) +
+				
+				x*1*x/total  *min(c41,1) : (c42'=1) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=1) & (b3'=1) &
+							(c11'=c31) & (c12'=c32) & (c21'=c41) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0);
 
 	
+
+	
+	
+				(1-x)*y*(1-x)/total : (honest_mined'=1) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=1) & (b3'=0) &
+							(c11'=c31) & (c12'=c32) & (c21'=c41) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+				
+				(1-x)*y*x/total : (c11'=min(d,c31+1)) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=1) & (b3'=0) &
+							(c12'=c32) & (c21'=c41) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+				
+				(1-x)*y*x/total *min(c11,1) : (c12'=min(d,c32+1)) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=1) & (b3'=0) &
+							(c11'=c31) & (c21'=c41) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+				
+				(1-x)*y*x/total : (c21'=min(d,c41+1)) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=1) & (b3'=0) &
+							(c11'=c31) & (c12'=c32) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+				
+				(1-x)*y*x/total *min(c21,1) : (c22'=1) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=1) & (b3'=0) &
+							(c11'=c31) & (c12'=c32) & (c21'=c41) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+				
+				(1-x)*y*x/total : (c31'=1) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=1) & (b3'=0) &
+							(c11'=c31) & (c12'=c32) & (c21'=c41) & (c22'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+				
+				(1-x)*y*x/total *min(c31,1) : (c32'=1) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=1) & (b3'=0) &
+							(c11'=c31) & (c12'=c32) & (c21'=c41) & (c22'=0) & (c31'=0) & (c41'=0) & (c42'=0)+
+				
+				(1-x)*y*x/total : (c41'=c41-1) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=1) & (b3'=0) &
+							(c11'=c31) & (c12'=c32) & (c21'=c41) & (c22'=0) & (c31'=0) & (c32'=0) & (c42'=0) +
+				
+				(1-x)*y*x/total  *min(c41,1) : (c42'=1) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=1) & (b3'=0) &
+							(c11'=c31) & (c12'=c32) & (c21'=c41) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0);
+
+	
+
+
+
+	
+	
+				(1-x)*(1-y)*(1-x)/total : (honest_mined'=1) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=0) & (b3'=0) &
+							(c11'=c31) & (c12'=c32) & (c21'=c41) & (c22'=c42) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+				
+				(1-x)*(1-y)*x/total : (c11'=min(d,c31+1)) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=0) & (b3'=0) &
+							(c12'=c32) & (c21'=c41) & (c22'=c42) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+				
+				(1-x)*(1-y)*x/total *min(c11,1) : (c12'=min(d,c32+1)) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=0) & (b3'=0) &
+							(c11'=c31) & (c21'=c41) & (c22'=c42) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+				
+				(1-x)*(1-y)*x/total : (c21'=min(d,c41+1)) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=0) & (b3'=0) &
+							(c11'=c31) & (c12'=c32) & (c22'=c42) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+				
+				(1-x)*(1-y)*x/total *min(c21,1) : (c22'=min(d,c42+1)) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=0) & (b3'=0) &
+							(c11'=c31) & (c12'=c32) & (c21'=c41) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+				
+				(1-x)*(1-y)*x/total : (c31'=1) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=0) & (b3'=0) &
+							(c12'=c32) & (c21'=c41) & (c22'=c42) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+				
+				(1-x)*(1-y)*x/total *min(c31,1) : (c32'=1) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=0) & (b3'=0) &
+							(c11'=c31) & (c12'=c32) & (c21'=c41) & (c22'=c42) & (c31'=0) & (c41'=0) & (c42'=0) +
+				
+				(1-x)*(1-y)*x/total : (c41'=c41-1) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=0) & (b3'=0) &
+							(c11'=c31) & (c12'=c32) & (c21'=c41) & (c22'=c42) & (c31'=0) & (c32'=0) & (c42'=0) +
+				
+				(1-x)*(1-y)*x/total  *min(c41,1) : (c42'=1) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=0) & (b3'=0) &
+							(c11'=c31) & (c12'=c32) & (c21'=c41) & (c22'=c42) & (c31'=0) & (c32'=0) & (c41'=0);
+
+	
+
+	
+	
+	
+
+
 
 
 
 
 	// branch 31	//Done!
 	// publish 2 block from branch 31
-	[] act=1 & honest_mined=1 & c31=2 -> x : (act'=0) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=1) & (b2'=1) & (b3'=1) &
-			(c11'=c32) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+	[] act=1 & honest_mined=1 & c31=2 -> 
+					x*(1-x)/total : (honest_mined'=1) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=1) & (b2'=1) & (b3'=1) &
+								(c11'=c32) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=c31-3) & (c42'=0) +
+					
+					x*1*x/total : (c11'=min(d,c32+1)) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=1) & (b2'=1) & (b3'=1) &
+								(c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=c31-3) & (c42'=0) +
+					
+					x*1*x/total *min(c11,1) : (c12'=1) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=1) & (b2'=1) & (b3'=1) &
+								(c11'=c32) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=c31-3) & (c42'=0) +
+					
+					x*1*x/total : (c21'=1) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=1) & (b2'=1) & (b3'=1) &
+								(c11'=c32) & (c12'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=c31-3) & (c42'=0) +
+					
+					x*1*x/total *min(c21,1) : (c22'=1) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=1) & (b2'=1) & (b3'=1) &
+								(c11'=c32) & (c12'=0) & (c21'=0) & (c31'=0) & (c32'=0) & (c41'=c31-3) & (c42'=0) +
+					
+					x*1*x/total : (c31'=1) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=1) & (b2'=1) & (b3'=1) &
+								(c11'=c32) & (c12'=0) & (c21'=0) & (c22'=0) & (c32'=0) & (c41'=c31-3) & (c42'=0) +
+					
+					x*1*x/total *min(c31,1) : (c32'=1) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=1) & (b2'=1) & (b3'=1) &
+								(c11'=c32) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c41'=c31-3) & (c42'=0) +
+					
+					x*1*x/total : (c41'=1) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=1) & (b2'=1) & (b3'=1) &
+								(c11'=c32) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c42'=0) +
+					
+					x*1*x/total  *min(c41,1) : (c42'=1) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=1) & (b2'=1) & (b3'=1) &
+								(c11'=c32) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=c31-3);
+	
+	
+	
+	
+					(1-x)*y*(1-x)/total : (honest_mined'=1) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=1) & (b2'=1) & (b3'=0) &
+								(c11'=c32) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=c31-3) & (c42'=0) +
+					
+					(1-x)*y*1*x/total : (c11'=min(d,c32+1)) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=1) & (b2'=1) & (b3'=0) &
+								(c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=c31-3) & (c42'=0) +
+					
+					(1-x)*y*1*x/total *min(c11,1) : (c12'=1) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=1) & (b2'=1) & (b3'=0) &
+								(c11'=c32) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=c31-3) & (c42'=0) +
+					
+					(1-x)*y*1*x/total : (c21'=1) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=1) & (b2'=1) & (b3'=0) &
+								(c11'=c32) & (c12'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=c31-3) & (c42'=0) +
+					
+					(1-x)*y*1*x/total *min(c21,1) : (c22'=1) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=1) & (b2'=1) & (b3'=0) &
+								(c11'=c32) & (c12'=0) & (c21'=0) & (c31'=0) & (c32'=0) & (c41'=c31-3) & (c42'=0) +
+					
+					(1-x)*y*1*x/total : (c31'=1) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=1) & (b2'=1) & (b3'=0) &
+								(c11'=c32) & (c12'=0) & (c21'=0) & (c22'=0) & (c32'=0) & (c41'=c31-3) & (c42'=0) +
+					
+					(1-x)*y*1*x/total *min(c31,1) : (c32'=1) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=1) & (b2'=1) & (b3'=0) &
+								(c11'=c32) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c41'=c31-3) & (c42'=0) +
+					
+					(1-x)*y*1*x/total : (c41'=1) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=1) & (b2'=1) & (b3'=0) &
+								(c11'=c32) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c42'=0) +
+					
+					(1-x)*y*1*x/total  *min(c41,1) : (c42'=1) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=1) & (b2'=1) & (b3'=0) &
+								(c11'=c32) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=c31-3);
+	
+	
+	
+	
+	
 
-			(1-x)*y : (act'=0) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=1) & (b2'=1) & (b3'=0) &
-			(c11'=c32) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
 
-			(1-x)*(1-y) : (act'=0) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=0) & (b3'=0) &
-			(c11'=c31) & (c12'=c32) & (c21'=c41) & (c22'=c42) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0);
+					(1-x)*(1-y)*(1-x)/total : (honest_mined'=1) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=0) & (b3'=0) &
+								(c11'=c31) & (c12'=c32) & (c21'=c41) & (c22'=c42) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+					
+					(1-x)*(1-y)*1*x/total : (c11'=min(d,c31+1)) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=0) & (b3'=0) &
+								(c12'=c32) & (c21'=c41) & (c22'=c42) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+					
+					(1-x)*(1-y)*1*x/total *min(c11,1) : (c12'=min(d,c32+1)) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=0) & (b3'=0) &
+								(c11'=c31) & (c21'=c41) & (c22'=c42) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+					
+					(1-x)*(1-y)*1*x/total : (c21'=min(d,c41+1)) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=0) & (b3'=0) &
+								(c11'=c31) & (c12'=c32) & (c22'=c42) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+					
+					(1-x)*(1-y)*1*x/total *min(c21,1) : (c22'=min(d,c42+1)) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=0) & (b3'=0) &
+								(c11'=c31) & (c12'=c32) & (c21'=c41) & (c22'=c42) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0) +
+					
+					(1-x)*(1-y)*1*x/total : (c31'=1) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=0) & (b3'=0) &
+								(c11'=c31) & (c12'=c32) & (c21'=c41) & (c22'=c42) & (c32'=0) & (c41'=0) & (c42'=0) +
+					
+					(1-x)*(1-y)*1*x/total *min(c31,1) : (c32'=1) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=0) & (b3'=0) &
+								(c11'=c31) & (c12'=c32) & (c21'=c41) & (c22'=c42) & (c31'=0) & (c41'=0) & (c42'=0) +
+					
+					(1-x)*(1-y)*1*x/total : (c41'=1) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=0) & (b3'=0) &
+								(c11'=c31) & (c12'=c32) & (c21'=c41) & (c22'=c42) & (c31'=0) & (c32'=0) & (c42'=0) +
+					
+					(1-x)*(1-y)*1*x/total  *min(c41,1) : (c42'=1) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=0) & (b3'=0) &
+								(c11'=c31) & (c12'=c32) & (c21'=c41) & (c22'=c42) & (c31'=0) & (c32'=0) & (c41'=0);
+	
+	
+	
+	
+	
 
-	// publish 3 blocks from branch 31
-	[] act=1 & honest_mined=1 & c31>2 -> (act'=0) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=1) & (b2'=1) & (b3'=1) &
-			(c11'=c32) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0);
+	
+	
+	
+	
+	
+	
+	
+	
 
-
-
-
-
-	// new
-	// publish 4 blocks from branch 31
-	[] act=1 & honest_mined=1 & c31>3 -> (act'=0) & (honest_mined'=0) & (adv'=b1+b2+1) & (honest'=3-(b1+b2+1)) & (b1'=1) & (b2'=1) & (b3'=1) &
-			(c11'=0) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0);
+//////////////////////////////////////////////////////////////////
 
 	
 
@@ -1512,19 +1738,12 @@ module selfish_mining_general_strategy
 			(1-x)*(1-y) : (act'=0) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=0) & (b3'=0) &
 			(c11'=c31) & (c12'=c32) & (c21'=c41) & (c22'=c42) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0);
 
-	// publish 3 blocks from branch 32
-	[] act=1 & honest_mined=1 & c32>2 -> (act'=0) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=1) & (b2'=1) & (b3'=1) &
-			(c11'=c31) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0);
 
 
 
 
 
-	// new
-	// publish 4 blocks from branch 32
-	[] act=1 & honest_mined=1 & c32>3 -> (act'=0) & (honest_mined'=0) & (adv'=b1+b2+1) & (honest'=3-(b1+b2+1)) & (b1'=1) & (b2'=1) & (b3'=1) &
-			(c11'=0) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0);
-
+	
 
 
 	
@@ -1545,10 +1764,6 @@ module selfish_mining_general_strategy
 			(1-x)*(1-y) : (act'=0) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=0) & (b3'=0) &
 			(c11'=c31) & (c12'=c32) & (c21'=c41) & (c22'=c42) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0);
 
-	// publish 4 blocks from branch 21
-	[] act=1 & honest_mined=1 & c21>3 -> (act'=0) & (honest_mined'=0) & (adv'=b1+1) & (honest'=2-(b1+1)) & (b1'=1) & (b2'=1) & (b3'=1) &
-			(c11'=0) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0);
-
 
 
 	
@@ -1566,11 +1781,6 @@ module selfish_mining_general_strategy
 
 			(1-x)*(1-y) : (act'=0) & (honest_mined'=0) & (adv'=b1+b2) & (honest'=2-(b1+b2)) & (b1'=b3) & (b2'=0) & (b3'=0) &
 			(c11'=c31) & (c12'=c32) & (c21'=c41) & (c22'=c42) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0);
-
-	// publish 4 blocks from branch 22
-	[] act=1 & honest_mined=1 & c22>3 -> (act'=0) & (honest_mined'=0) & (adv'=b1+1) & (honest'=2-(b1+1)) & (b1'=1) & (b2'=1) & (b3'=1) &
-			(c11'=0) & (c12'=0) & (c21'=0) & (c22'=0) & (c31'=0) & (c32'=0) & (c41'=0) & (c42'=0);
-
 
 
 
